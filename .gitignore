@@ -1,0 +1,10 @@
+venv/
+.venv/
+env/
+.DS_Store
+Thumbs.db
+data/raw/*
+*.zip
+*.csv
+*.xlsx
+*.pbix.tmp
