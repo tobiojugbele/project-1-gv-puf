@@ -21,10 +21,9 @@ def run_puf_etl():
         with zipfile.ZipFile(zip_path, "r") as z:
             if target_excel not in z.namelist():
                 print(f"❌ Could not locate {target_excel} inside the ZIP file archive.")
-                print(f"Available files: {z.namelist()}")
                 return
             with z.open(target_excel) as f:
-                df = pd.read_excel(f, sheet_name=0, engine="openpyxl", low_memory=False)
+                df = pd.read_excel(f, sheet_name=0, engine="openpyxl")
     except Exception as e:
         print(f"❌ Ingestion pipeline failed: {str(e)}")
         return
@@ -34,7 +33,7 @@ def run_puf_etl():
 
     fips_cols = [c for c in df.columns if "fips" in c]
     for col in fips_cols:
-        df[col] = df[col].astype(str).str.split(".").str[0].str.zfill(5)
+        df[col] = df[col].astype(str).str.split(".").str.str.zfill(5)
         print(f"✅ Formatted geography column string: {col}")
 
     value_cols = [c for c in df.columns if "spending" in c or "utilization" in c or "emissions" in c or "co2" in c]
