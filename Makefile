@@ -4,6 +4,9 @@ install:
 etl:
 	@python3 etl.py
 
+run:
+	@python3 run_analysis.py
+
 test:
 	@pytest test_pipeline.py -v
 
