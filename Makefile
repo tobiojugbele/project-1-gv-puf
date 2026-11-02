@@ -7,6 +7,9 @@ etl:
 run:
 	@python3 run_analysis.py
 
+regression:
+	@python3 regression_analysis.py
+
 test:
 	@pytest test_pipeline.py -v
 
